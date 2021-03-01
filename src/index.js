@@ -5,10 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import firebase from 'firebase/app';
-import 'firebase/auth';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
-import firebaseConfig from './utils/firebase';
-import theme from './utils/theme';
+import { firebaseConfig } from './utils/firebase';
+import { theme } from './utils/theme';
 
 ReactDOM.render(
 	<ChakraProvider theme={theme}>

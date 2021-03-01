@@ -1,18 +1,24 @@
 import { extendTheme } from '@chakra-ui/react';
 
-const theme = extendTheme({
+export const theme = extendTheme({
 	colors: {
-		myGray: '#283f3bff',
-		verdigris: '#48a9a6ff',
-		teaGreen: '#def2c8ff',
-		silverPink: '#cfb1b7ff',
-		myRed: '#ce1483ff',
+		pageColors: {
+			gray: '#283f3b',
+			Verdigris: '#48a9a6',
+			green: '#def2c8',
+			pink: '#cfb1b7',
+			red: '#ce1483',
+		},
 	},
 	fonts: {
 		body: 'system-ui, sans-serif',
 		heading: 'Georgia, serif',
 		mono: 'Menlo, monospace',
 	},
+	// components: {
+	// 	Button: {
+	// 		fontWeight: '400',
+	// 		color: 'Medium Violet Red',
+	// 	},
+	// },
 });
-
-export default theme;

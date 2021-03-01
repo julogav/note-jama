@@ -1,51 +1,86 @@
-export const firebaseConfig = {
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+
+const firebaseConfig = {
 	apiKey: 'AIzaSyAL_KDPRwyXN1LXNSjT1FopI8RhU6EsTYQ',
 	authDomain: 'note-jama-dev.firebaseapp.com',
+	databaseURL: 'https://note-jama-dev.firebaseio.com',
 	projectId: 'note-jama-dev',
 	storageBucket: 'note-jama-dev.appspot.com',
-	messagingSenderId: '65818198760',
 	appId: '1:65818198760:web:8b3c581c59aa1075ceff5d',
 };
 
-export default firebaseConfig;
+firebase.initializeApp(firebaseConfig);
 
-// const Firebase = () => {
-// 	firebase.initializeApp(firebaseConfig);
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-// 	const user = firebase.auth().currentUser;
-// 	const providers = {
-// 		googleProvider: new firebase.auth.GoogleAuthProvider(),
-// 		fbProvider: new firebase.auth.FacebookAuthProvider(),
-// 	};
+const googleUser = () =>
+	firebase
+		.auth()
+		.signInWithPopup(googleProvider)
+		.then(result => {
+			const credential = result.credential;
+			console.log(credential);
+			const token = credential.accessToken;
+			const user = result.user;
+			console.log(user);
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
 
-// 	const newUser = (email, password) =>
-// 		firebase
-// 			.auth()
-// 			.createUserWithEmailAndPassword(email, password)
-// 			.then(userCredential => {
-// 				const user = userCredential.user;
-// 			})
-// 			.catch(error => {
-// 				const errorCode = error.code;
-// 				const errorMessage = error.message;
-// 			});
+const facebookUser = () =>
+	firebase
+		.auth()
+		.signInWithPopup(facebookProvider)
+		.then(result => {
+			const credential = result.credential;
+			console.log(credential);
+			const token = credential.accessToken;
+			const user = result.user;
+			console.log(user);
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
 
-// 	const signIn = (email, password) => {
-// 		firebase.auth
-// 			.signInWithEmailAndPassword(email, password)
-// 			.then(userCredential => {
-// 				const user = userCredential.user;
-// 			})
-// 			.catch(error => {
-// 				const errorCode = error.code;
-// 				const errorMessage = error.message;
-// 			});
-// 	};
+const signOut = () => firebase.auth().signOut();
 
-// 	const signOut = () => firebase.auth().signOut();
+const authServices = {
+	googleProvider,
+	facebookProvider,
+	googleUser,
+	facebookUser,
+	signOut,
+};
 
-// 	const passwordUpdate = password =>
-// 		firebase.auth().currentUser.updatePassword(password);
-// };
+const db = firebase.firestore().collection('/notes');
 
-// export default Firebase;
+const getAll = () => {
+	return db;
+};
+
+const create = data => {
+	return db.add(data);
+};
+
+const update = (id, value) => {
+	return db.doc(id).update(value);
+};
+
+const remove = id => {
+	return db.doc(id).delete();
+};
+
+const firestore = {
+	getAll,
+	create,
+	update,
+	remove,
+};
+
+export { firebaseConfig, firestore, authServices };

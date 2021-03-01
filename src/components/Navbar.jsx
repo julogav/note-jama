@@ -18,13 +18,13 @@ const NavBar = () => {
 				</Heading>
 			</Box>
 			<Box h='40px'>
-				<Link to={ROUTES.SIGN_IN}>Sign In</Link>
-			</Box>
-			<Box h='40px'>
-				<Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+				<Link to={ROUTES.NOTELIST}>Notes</Link>
 			</Box>
 			<Box h='40px'>
 				<Link to={ROUTES.NEW_NOTE}>New Note</Link>
+			</Box>
+			<Box h='40px'>
+				<Link to={ROUTES.SIGN_UP}>Sign Up</Link>
 			</Box>
 			<Box h='40px'>
 				<Link>Sign Out</Link>

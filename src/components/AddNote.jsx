@@ -9,15 +9,17 @@ import {
 	Input,
 	Heading,
 	Button,
+	Alert,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { firestore } from '../utils/firebase';
 
-const AddNote = () => {
+const AddNote = props => {
 	const [content, setContent] = useState('');
 	const [priority, setPriority] = useState('');
 	const [date, setDate] = useState('');
 	const [title, setTitle] = useState('');
+	const [message, setMessage] = useState('');
 
 	const reset = e => {
 		setContent('');
@@ -26,21 +28,26 @@ const AddNote = () => {
 		setPriority('');
 	};
 
-	const onSubmit = e => {
+	const onSubmit = async e => {
 		e.preventDefault();
-		const newNote = {
+		const note = {
 			title: title,
 			content: content,
 			dueDate: date,
 			priority: priority,
 		};
 
-		firestore.create(newNote).catch(e => console.log(e));
+		const response = await firestore.create(note);
+		if (response) {
+			setMessage(`Your new note has been saved!`);
+		}
+		reset();
 	};
 
 	return (
 		<Container id='noteForm' m={5}>
 			<Heading fontSize='28px'>Add a new note</Heading>
+			{message && <Alert>{message}</Alert>}
 			<FormControl id='title'>
 				<FormLabel mt={5}>Note title</FormLabel>
 				<Input

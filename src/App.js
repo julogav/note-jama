@@ -7,6 +7,7 @@ import { Grid, GridItem, Heading } from '@chakra-ui/react';
 import * as ROUTES from './utils/routes.js';
 import NavBar from './components/Navbar.jsx';
 import AddNote from './components/AddNote';
+import NoteList from './components/NoteList';
 
 const App = () => {
 	return (
@@ -34,6 +35,7 @@ const App = () => {
 						<Route path={ROUTES.SIGN_UP} component={SignUp} />
 						<Route path={ROUTES.SIGN_IN} component={SignIn} />
 						<Route path={ROUTES.NEW_NOTE} component={AddNote} />
+						<Route exact path={ROUTES.NOTELIST} component={NoteList} />
 					</Switch>
 				</GridItem>
 			</Grid>

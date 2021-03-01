@@ -11,27 +11,45 @@ import {
 	Button,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { firestore } from '../utils/firebase';
 
 const AddNote = () => {
 	const [content, setContent] = useState('');
 	const [priority, setPriority] = useState('');
 	const [date, setDate] = useState('');
+	const [title, setTitle] = useState('');
+
+	const reset = e => {
+		setContent('');
+		setDate('');
+		setTitle('');
+		setPriority('');
+	};
 
 	const onSubmit = e => {
 		e.preventDefault();
 		const newNote = {
+			title: title,
 			content: content,
 			dueDate: date,
 			priority: priority,
-			dateCreated: new Date().toLocaleDateString,
 		};
-		//set up firestorecloudstorage
+
+		firestore.create(newNote).catch(e => console.log(e));
 	};
 
 	return (
 		<Container id='noteForm' m={5}>
 			<Heading fontSize='28px'>Add a new note</Heading>
-			<FormControl>
+			<FormControl id='title'>
+				<FormLabel mt={5}>Note title</FormLabel>
+				<Input
+					value={title}
+					onChange={e => setTitle(e.target.value)}
+					placeholder='Title'
+				/>
+			</FormControl>
+			<FormControl id='content'>
 				<FormLabel mt={5}>What's on your mind?</FormLabel>
 				<Textarea
 					value={content}
@@ -58,7 +76,9 @@ const AddNote = () => {
 				<FormLabel mt={5}>Due Date</FormLabel>
 				<Input type='date' onChange={e => setDate(e.target.value)} />
 			</FormControl>
-			<Button onClick={onSubmit}>Save note</Button>
+			<Button mt={5} onClick={onSubmit}>
+				Save note
+			</Button>
 		</Container>
 	);
 };

@@ -21,7 +21,7 @@ const NoteList = props => {
 			setAllNotes(notes);
 		};
 		res();
-	}, []);
+	}, [allNotes]);
 
 	//order by date, by priority
 
@@ -54,6 +54,9 @@ const NoteList = props => {
 					Sort
 				</Button>
 			</RadioGroup>
+			<Text ml={3}>
+				<i>Click on a note to edit</i>
+			</Text>
 			{allNotes && (
 				<Flex wrap='wrap' direction='row'>
 					{allNotes.map(note => (

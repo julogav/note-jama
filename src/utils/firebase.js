@@ -60,6 +60,8 @@ const authServices = {
 
 const db = firebase.firestore().collection('/notes');
 
+//CRUD
+
 const getAll = async () => {
 	let notes = [];
 	const snapshots = await db.get();

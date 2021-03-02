@@ -1,7 +1,6 @@
 import * as ROUTES from '../utils/routes';
 import { Box, Heading, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { authServices } from '../utils/firebase';
 
 const NavBar = () => {
 	return (
@@ -33,13 +32,10 @@ const NavBar = () => {
 					<b>SIGN UP</b>
 				</Link>
 			</Box>
-			<Box
-				cursor='pointer'
-				h='50px'
-				mt='6'
-				fontSize='20px'
-				onClick={authServices.signOut}>
-				<b> SIGN OUT</b>
+			<Box h='50px' mt='6' fontSize='20px'>
+				<Link to={ROUTES.SIGN_OUT}>
+					<b>SIGN OUT</b>
+				</Link>
 			</Box>
 		</VStack>
 	);

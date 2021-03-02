@@ -7,6 +7,7 @@ import * as ROUTES from './utils/routes.js';
 import NavBar from './components/Navbar.jsx';
 import AddNote from './components/AddNote';
 import NoteList from './components/NoteList';
+import SignOut from './components/SignOut';
 
 const App = () => {
 	return (
@@ -33,6 +34,7 @@ const App = () => {
 					<Switch>
 						<Route path={ROUTES.SIGN_UP} component={SignUp} />
 						<Route path={ROUTES.NEW_NOTE} component={AddNote} />
+						<Route path={ROUTES.SIGN_OUT} component={SignOut} />
 						<Route exact path={ROUTES.NOTELIST} component={NoteList} />
 					</Switch>
 				</GridItem>

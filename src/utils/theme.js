@@ -15,10 +15,4 @@ export const theme = extendTheme({
 		heading: 'Georgia, serif',
 		mono: 'Menlo, monospace',
 	},
-	// components: {
-	// 	Button: {
-	// 		fontWeight: '400',
-	// 		color: 'Medium Violet Red',
-	// 	},
-	// },
 });

@@ -47,7 +47,7 @@ const AddNote = props => {
 	return (
 		<Container id='noteForm' m={5}>
 			<Heading fontSize='28px'>Add a new note</Heading>
-			{message && <Alert>{message}</Alert>}
+			{message && <Alert bg='colorPage.verdigris'>{message}</Alert>}
 			<FormControl id='title'>
 				<FormLabel mt={5}>Note title</FormLabel>
 				<Input

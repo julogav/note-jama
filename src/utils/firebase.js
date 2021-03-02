@@ -23,13 +23,13 @@ const googleUser = () =>
 		.then(result => {
 			const credential = result.credential;
 			console.log(credential);
-			const token = credential.accessToken;
+			console.log(credential.accessToken);
 			const user = result.user;
 			console.log(user);
 		})
 		.catch(error => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
+			console.log(error.code);
+			console.log(error.message);
 		});
 
 const facebookUser = () =>
@@ -39,13 +39,13 @@ const facebookUser = () =>
 		.then(result => {
 			const credential = result.credential;
 			console.log(credential);
-			const token = credential.accessToken;
+			console.log(credential.accessToken);
 			const user = result.user;
 			console.log(user);
 		})
 		.catch(error => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
+			console.log(error.code);
+			console.log(error.message);
 		});
 
 const signOut = () => firebase.auth().signOut();
@@ -61,9 +61,54 @@ const authServices = {
 const db = firebase.firestore().collection('/notes');
 
 const getAll = async () => {
+	let notes = [];
 	const snapshots = await db.get();
-	const data = snapshots.docs;
-	return data;
+	const data = snapshots.forEach(doc => {
+		let id = doc.id;
+		let data = doc.data();
+		notes.push({
+			id: id,
+			title: data.title,
+			content: data.content,
+			dueDate: data.dueDate,
+			priority: data.priority,
+		});
+	});
+	return notes;
+};
+
+const getAllByDate = async () => {
+	let notes = [];
+	const snapshots = await db.orderBy('dueDate', 'desc').get();
+	const data = snapshots.forEach(doc => {
+		let id = doc.id;
+		let data = doc.data();
+		notes.push({
+			id: id,
+			title: data.title,
+			content: data.content,
+			dueDate: data.dueDate,
+			priority: data.priority,
+		});
+	});
+	return notes;
+};
+
+const getAllByPriority = async () => {
+	let notes = [];
+	const snapshots = await db.orderBy('priority').get();
+	const data = snapshots.forEach(doc => {
+		let id = doc.id;
+		let data = doc.data();
+		notes.push({
+			id: id,
+			title: data.title,
+			content: data.content,
+			dueDate: data.dueDate,
+			priority: data.priority,
+		});
+	});
+	return notes;
 };
 
 const create = data => {
@@ -80,6 +125,8 @@ const remove = id => {
 
 const firestore = {
 	getAll,
+	getAllByDate,
+	getAllByPriority,
 	create,
 	update,
 	remove,

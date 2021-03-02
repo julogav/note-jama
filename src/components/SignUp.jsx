@@ -1,7 +1,6 @@
 import { Container, Heading, Button } from '@chakra-ui/react';
 import { FirebaseAuthConsumer } from '@react-firebase/auth';
 import { authServices } from '../utils/firebase.js';
-import * as ROUTES from '../utils/routes.js';
 
 const SignUpForm = props => {
 	const onGoogleSubmit = e => {

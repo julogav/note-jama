@@ -1,6 +1,7 @@
 import * as ROUTES from '../utils/routes';
 import { Box, Heading, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { authServices } from '../utils/firebase';
 
 const NavBar = () => {
 	return (
@@ -12,22 +13,33 @@ const NavBar = () => {
 			justify='top'
 			borderStartRadius='md'
 			borderBottomRadius='md'>
-			<Box h='40px'>
-				<Heading mt='3' fontStyle='italic' fontSize='25px'>
+			<Box h='50px' m='8'>
+				<Heading fontStyle='italic' fontSize='30px'>
 					Pin Me Up!
 				</Heading>
 			</Box>
-			<Box h='40px'>
-				<Link to={ROUTES.NOTELIST}>Notes</Link>
+			<Box h='50px' mt='6' fontSize='20px'>
+				<Link to={ROUTES.NOTELIST}>
+					<b>NOTES</b>
+				</Link>
 			</Box>
-			<Box h='40px'>
-				<Link to={ROUTES.NEW_NOTE}>New Note</Link>
+			<Box h='50px' mt='6' fontSize='20px'>
+				<Link to={ROUTES.NEW_NOTE}>
+					<b>NEW NOTE</b>
+				</Link>
 			</Box>
-			<Box h='40px'>
-				<Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+			<Box h='50px' mt='6' fontSize='20px'>
+				<Link to={ROUTES.SIGN_UP}>
+					<b>SIGN UP</b>
+				</Link>
 			</Box>
-			<Box h='40px'>
-				<Link>Sign Out</Link>
+			<Box
+				cursor='pointer'
+				h='50px'
+				mt='6'
+				fontSize='20px'
+				onClick={authServices.signOut}>
+				<b> SIGN OUT</b>
 			</Box>
 		</VStack>
 	);
